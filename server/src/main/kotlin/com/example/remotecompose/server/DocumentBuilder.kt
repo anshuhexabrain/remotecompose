@@ -68,6 +68,7 @@ private fun renderElement(writer: RemoteComposeWriter, el: ElementConfig, inside
         "text" -> renderText(writer, el)
         "button" -> renderButton(writer, el, fillWidth = !insideRow)
         "spacer" -> renderSpacer(writer, el)
+        "hspacer" -> renderHSpacer(writer, el)
         "divider" -> renderDivider(writer, el)
         "card" -> renderCard(writer, el)
         "row" -> renderRow(writer, el)
@@ -116,6 +117,12 @@ private fun renderButton(writer: RemoteComposeWriter, el: ElementConfig, fillWid
 
 private fun renderSpacer(writer: RemoteComposeWriter, el: ElementConfig) {
     val mod = RecordingModifier().height(dp(el.height ?: 16))
+    writer.startBox(mod)
+    writer.endBox()
+}
+
+private fun renderHSpacer(writer: RemoteComposeWriter, el: ElementConfig) {
+    val mod = RecordingModifier().width(dp(el.width ?: 16))
     writer.startBox(mod)
     writer.endBox()
 }

@@ -19,6 +19,7 @@ data class ElementConfig(
     val textColor: String? = null,
     val fontSize: Int? = null,
     val height: Int? = null,
+    val width: Int? = null,
     val cornerRadius: Int? = null,
     val borderColor: String? = null,
     val borderWidth: Int? = null,
