@@ -5,12 +5,12 @@
   "elements": [
     {
       "type": "spacer",
-      "id": "45",
-      "height": 20
+      "id": "52",
+      "height": 4
     },
     {
       "type": "card",
-      "id": "46",
+      "id": "53",
       "align": "start",
       "paddingH": 0,
       "paddingV": 0,
@@ -22,25 +22,25 @@
       "children": [
         {
           "type": "card",
-          "id": "47",
+          "id": "54",
           "align": "start",
           "paddingH": 14,
           "paddingV": 6,
-          "color": "#CDBE18",
-          "cornerRadius": 3,
+          "color": "#00BCD4",
+          "cornerRadius": 0,
           "children": [
             {
               "type": "text",
-              "id": "48",
-              "text": "Seryog",
-              "color": "#F90606",
-              "fontSize": 15
+              "id": "55",
+              "text": "Best",
+              "color": "#FFFFFF",
+              "fontSize": 13
             }
           ]
         },
         {
           "type": "card",
-          "id": "49",
+          "id": "56",
           "align": "start",
           "paddingH": 14,
           "paddingV": 10,
@@ -49,72 +49,72 @@
           "children": [
             {
               "type": "text",
-              "id": "50",
-              "text": "Test Estimate 2",
+              "id": "57",
+              "text": "Test Estimate",
               "color": "#1A1A1A",
               "fontSize": 18
             },
             {
               "type": "spacer",
-              "id": "50_sp",
+              "id": "58",
               "height": 4
             },
             {
               "type": "text",
-              "id": "51",
+              "id": "59",
               "text": "TOTAL",
               "color": "#999999",
               "fontSize": 10
             },
             {
               "type": "spacer",
-              "id": "51_sp",
+              "id": "60",
               "height": 4
             },
             {
               "type": "text",
-              "id": "52",
+              "id": "61",
               "text": "$3,012.99",
               "color": "#1A1A1A",
               "fontSize": 17
             },
             {
               "type": "spacer",
-              "id": "53",
+              "id": "62",
               "height": 6
             },
             {
               "type": "text",
-              "id": "54",
+              "id": "63",
               "text": "3 ITEMS",
               "color": "#00BCD4",
               "fontSize": 11
             },
             {
               "type": "spacer",
-              "id": "54_sp",
+              "id": "64",
               "height": 4
             },
             {
               "type": "text",
-              "id": "55",
+              "id": "65",
               "text": "1 Service(s), 1 Equipment, 1 Material(s)",
               "color": "#666666",
               "fontSize": 12
             },
             {
               "type": "spacer",
-              "id": "56",
-              "height": 12
+              "id": "66",
+              "height": 8
             },
             {
               "type": "button",
-              "id": "57",
+              "id": "67",
               "text": "+  Add items",
-              "color": "#DBDBDB",
+              "color": "#FFFFFF",
               "textColor": "#333333",
               "fontSize": 13,
-              "cornerRadius": 22,
+              "cornerRadius": 20,
               "actionName": "add_items_1",
               "borderColor": "#DDDDDD",
               "borderWidth": 1
@@ -123,13 +123,13 @@
         },
         {
           "type": "divider",
-          "id": "58",
+          "id": "68",
           "color": "#EEEEEE",
           "height": 1
         },
         {
           "type": "card",
-          "id": "59",
+          "id": "69",
           "align": "start",
           "paddingH": 14,
           "paddingV": 8,
@@ -138,7 +138,7 @@
           "children": [
             {
               "type": "text",
-              "id": "60",
+              "id": "70",
               "text": "Recommend",
               "color": "#444444",
               "fontSize": 13
