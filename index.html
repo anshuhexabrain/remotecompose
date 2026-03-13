@@ -126,20 +126,17 @@
         </div>
         <div class="ha">
             <span class="sb" id="deployStatus"><span class="dot"></span><span id="deployStatusText">Ready</span></span>
-            <div style="display:flex;align-items:center;gap:4px;border:1.5px solid var(--outline);border-radius:8px;padding:2px 4px 2px 8px">
-                <input type="password" id="ghToken" placeholder="GitHub Token" style="border:none;outline:none;font-size:11px;font-family:inherit;width:160px;background:transparent">
-                <button class="btn btn-g btn-s" onclick="toggleToken()" style="padding:2px"><span class="material-icons-round" id="tokenEye" style="font-size:14px">visibility</span></button>
-            </div>
             <button class="btn btn-g" onclick="resetToDefaults()"><span class="material-icons-round">restart_alt</span>Reset</button>
             <button class="btn btn-o" onclick="copyJson()"><span class="material-icons-round">content_copy</span>Copy JSON</button>
-            <button class="btn btn-p" onclick="deployConfig()"><span class="material-icons-round">cloud_upload</span>Deploy</button>
+            <button class="btn btn-p" onclick="deployConfig()"><span class="material-icons-round">cloud_upload</span>Deploy Local</button>
         </div>
     </header>
     <div class="screen-bar">
         <span class="lbl">Screen:</span>
         <button class="screen-tab active" id="tab-home" onclick="switchScreen('home')"><span class="material-icons-round">home</span>Home</button>
         <button class="screen-tab" id="tab-detail" onclick="switchScreen('detail')"><span class="material-icons-round">article</span>Detail</button>
-
+        <button class="screen-tab" id="tab-estimates" onclick="switchScreen('estimates')"><span class="material-icons-round">request_quote</span>Estimates</button>
+        <button class="screen-tab" id="tab-estimate_detail" onclick="switchScreen('estimate_detail')"><span class="material-icons-round">receipt_long</span>Estimate Detail</button>
     </div>
     <main>
         <div class="panel">
@@ -174,10 +171,11 @@
     <div class="toast" id="toast"><span class="material-icons-round" id="toastIcon">check_circle</span><span id="toastMsg"></span></div>
 
 <script>
-const REPO='achatikyan',REPO_N='remotecompose';
 const screens={
     home:{file:'config.json',label:'Home',elements:[],bg:'#F5F0FF',scrollable:false,padding:null},
-    detail:{file:'config_detail.json',label:'Detail',elements:[],bg:'#F0F4F8',scrollable:false,padding:null}
+    detail:{file:'config_detail.json',label:'Detail',elements:[],bg:'#F0F4F8',scrollable:false,padding:null},
+    estimates:{file:'config_estimates.json',label:'Estimates',elements:[],bg:'#F7F7F7',scrollable:false,padding:null},
+    estimate_detail:{file:'config_estimate_detail.json',label:'Estimate Detail',elements:[],bg:'#FFFFFF',scrollable:false,padding:null}
 };
 let activeScreen='home';
 let elements=[],dragIdx=null,nextId=1,expandedIdx=-1,expandedChildId=null,expandedGcId=null;
@@ -245,7 +243,7 @@ const defaultsDetail=[
     {type:'spacer',height:12},
     {type:'text',text:'No app update required.',color:'#9CA3AF',fontSize:11}
 ];
-function init(){const t=localStorage.getItem('gh_token');if(t)document.getElementById('ghToken').value=t;updateVersionLabel();fetchScreen('home');fetchScreen('detail')}
+function init(){updateVersionLabel();fetchScreen('home');fetchScreen('detail');fetchScreen('estimates');fetchScreen('estimate_detail')}
 const BUILD_VERSION=84;
 function updateVersionLabel(){document.getElementById('versionLabel').textContent='0.0.'+BUILD_VERSION+'-alpha'}
 async function fetchScreen(key){
@@ -296,7 +294,7 @@ const defaultsEstimateDetail=[
     {type:'spacer',height:8},
     {type:'row',children:[{type:'text',text:'Total',color:'#1A1A1A',fontSize:18},{type:'text',text:'$3,012.99',color:'#1A1A1A',fontSize:18}]}
 ];
-function loadScreenDefs(key){const m={home:defaultsHome,detail:defaultsDetail};const defs=m[key]||[];screens[key].elements=defs.map(e=>assignIds(JSON.parse(JSON.stringify(e))))}
+function loadScreenDefs(key){const m={home:defaultsHome,detail:defaultsDetail,estimates:defaultsEstimates,estimate_detail:defaultsEstimateDetail};const defs=m[key]||[];screens[key].elements=defs.map(e=>assignIds(JSON.parse(JSON.stringify(e))))}
 function activateScreen(){const s=screens[activeScreen];elements=s.elements;document.getElementById('bgColor').value=s.bg;document.getElementById('bgColorCode').textContent=s.bg.toUpperCase();expandedIdx=-1;expandedChildId=null;expandedGcId=null;render()}
 function switchScreen(key){if(key===activeScreen)return;screens[activeScreen].elements=elements;screens[activeScreen].bg=document.getElementById('bgColor').value;activeScreen=key;document.querySelectorAll('.screen-tab').forEach(t=>t.classList.remove('active'));document.getElementById('tab-'+key).classList.add('active');activateScreen()}
 function assignIds(e){e={...e,id:e.id||uid()};if(e.children)e.children=e.children.map(c=>assignIds({...c}));return e}
@@ -547,66 +545,31 @@ function cleanEl(el){
 
 async function copyJson(){const j=JSON.stringify(getConfig(),null,2);try{await navigator.clipboard.writeText(j)}catch{const t=document.createElement('textarea');t.value=j;document.body.appendChild(t);t.select();document.execCommand('copy');document.body.removeChild(t)}showToast('JSON copied','content_copy')}
 async function deployConfig(){
-    const token=document.getElementById('ghToken').value.trim();
-    if(!token){showToast('Enter a GitHub token first','warning',true);document.getElementById('ghToken').focus();return}
-    localStorage.setItem('gh_token',token);setDeploy('deploying');
-    const fp=currentFile();
-    try{const existing=await fetch(`https://api.github.com/repos/${REPO}/${REPO_N}/contents/${fp}`,{headers:{Authorization:`Bearer ${token}`}});let sha=null;if(existing.ok)sha=(await existing.json()).sha;
-    const content=btoa(unescape(encodeURIComponent(JSON.stringify(getConfig(),null,2)+'\n')));
-    const body={message:'Update '+screens[activeScreen].label+' screen from web editor',content};if(sha)body.sha=sha;
-    const r=await fetch(`https://api.github.com/repos/${REPO}/${REPO_N}/contents/${fp}`,{method:'PUT',headers:{Authorization:`Bearer ${token}`,'Content-Type':'application/json'},body:JSON.stringify(body)});
-    if(r.ok){setDeploy('deployed');showToast(screens[activeScreen].label+' deployed!','cloud_done');pollActionStatus(token)}else{const e=await r.json();setDeploy('err');showToast('Deploy failed: '+(e.message||r.status),'error',true)}}
-    catch(e){setDeploy('err');showToast('Deploy failed: '+e.message,'error',true)}}
+    setDeploy('deploying');
+    try{
+        const r=await fetch('/api/deploy',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({screen:activeScreen,config:getConfig()})});
+        const body=await r.json().catch(()=>({}));
+        if(r.ok&&body.ok){
+            setDeploy('action_done');
+            showToast(screens[activeScreen].label+' deployed locally','cloud_done');
+            fetchScreen(activeScreen);
+            return;
+        }
+        setDeploy('err');
+        showToast('Deploy failed: '+(body.message||r.statusText||r.status),'error',true);
+    }
+    catch(e){setDeploy('err');showToast('Deploy failed: '+e.message,'error',true)}
+}
 
 let deployTimer=null;let deployStartTime=0;
 function setDeploy(s){
     const b=document.getElementById('deployStatus'),t=document.getElementById('deployStatusText');
     if(s==='deploying'){stopDeployTimer();b.className='sb';t.textContent='Deploying...'}
-    else if(s==='deployed'){b.className='sb ok';t.textContent='Deployed \u2713';deployStartTime=Date.now();startDeployTimer()}
-    else if(s==='action_done'){stopDeployTimer();b.className='sb ok';t.textContent='\u2713 Binary ready';showToast('Binary .rc files generated!','check_circle');setTimeout(()=>{b.className='sb';t.textContent='Ready'},8000)}
-    else if(s==='action_fail'){stopDeployTimer();b.className='sb err';t.textContent='\u2717 Action failed';setTimeout(()=>{b.className='sb';t.textContent='Ready'},8000)}
+    else if(s==='action_done'){stopDeployTimer();b.className='sb ok';t.textContent='\u2713 Local binary ready';setTimeout(()=>{b.className='sb';t.textContent='Ready'},8000)}
     else if(s==='err'){stopDeployTimer();b.className='sb err';t.textContent='Failed';setTimeout(()=>{b.className='sb';t.textContent='Ready'},5000)}
     else{stopDeployTimer();b.className='sb';t.textContent='Ready'}
 }
-function startDeployTimer(){
-    stopDeployTimer();
-    deployTimer=setInterval(()=>{
-        const b=document.getElementById('deployStatus'),t=document.getElementById('deployStatusText');
-        const elapsed=Math.round((Date.now()-deployStartTime)/1000);
-        const mins=Math.floor(elapsed/60);
-        const secs=elapsed%60;
-        const timeStr=mins>0?mins+'m '+secs+'s':secs+'s';
-        b.className='sb action';
-        t.textContent='\u2699 Building binary... '+timeStr;
-    },1000);
-}
 function stopDeployTimer(){if(deployTimer){clearInterval(deployTimer);deployTimer=null}}
-
-async function pollActionStatus(token){
-    await new Promise(r=>setTimeout(r,8000));
-    const wfFile='convert.yml';
-    for(let i=0;i<60;i++){
-        try{
-            const resp=await fetch(`https://api.github.com/repos/${REPO}/${REPO_N}/actions/workflows/${wfFile}/runs?per_page=1`,{headers:{Authorization:`Bearer ${token}`}});
-            if(!resp.ok)break;
-            const data=await resp.json();
-            const run=data.workflow_runs?.[0];
-            if(!run){await new Promise(r=>setTimeout(r,3000));continue}
-            if(run.status==='completed'){
-                if(run.conclusion==='success'){
-                    const finishedAt=new Date(run.updated_at).getTime();
-                    if(finishedAt>deployStartTime){setDeploy('action_done');return}
-                }else{
-                    const finishedAt=new Date(run.updated_at).getTime();
-                    if(finishedAt>deployStartTime){setDeploy('action_fail');return}
-                }
-            }
-        }catch(e){break}
-        await new Promise(r=>setTimeout(r,4000));
-    }
-    stopDeployTimer();
-}
-function toggleToken(){const i=document.getElementById('ghToken'),ic=document.getElementById('tokenEye');if(i.type==='password'){i.type='text';ic.textContent='visibility_off'}else{i.type='password';ic.textContent='visibility'}}
 let toastTimer;function showToast(msg,icon,err){const t=document.getElementById('toast');document.getElementById('toastMsg').textContent=msg;document.getElementById('toastIcon').textContent=icon||'check_circle';t.style.background=err?'#b71c1c':'#323232';clearTimeout(toastTimer);t.classList.add('show');toastTimer=setTimeout(()=>t.classList.remove('show'),3000)}
 init();
 </script>

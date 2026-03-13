@@ -1,168 +1,56 @@
 {
-  "backgroundColor": "#FFFFFF",
+  "backgroundColor": "#F5F0FF",
   "elements": [
     {
       "type": "text",
       "id": "1",
-      "text": "Remote Compose",
+      "text": "Sample App",
       "color": "#4A148C",
       "fontSize": 32
     },
     {
       "type": "spacer",
-      "id": "2",
-      "height": 4
-    },
-    {
-      "type": "text",
-      "id": "3",
-      "text": "Server-driven UI, rendered natively",
-      "color": "#7E57C2",
-      "fontSize": 14
-    },
-    {
-      "type": "spacer",
-      "id": "4",
-      "height": 20
-    },
-    {
-      "type": "card",
-      "id": "5",
-      "paddingH": 20,
-      "paddingV": 16,
-      "color": "#FFFFFF",
-      "cornerRadius": 20,
-      "borderColor": "#E0D6F2",
-      "borderWidth": 1,
-      "children": [
-        {
-          "type": "text",
-          "id": "6",
-          "text": "Dynamic Layouts",
-          "color": "#1A1A2E",
-          "fontSize": 18
-        },
-        {
-          "type": "spacer",
-          "id": "7",
-          "height": 4
-        },
-        {
-          "type": "text",
-          "id": "8",
-          "text": "Add, remove, reorder UI elements from the web \u2014 no app update needed.",
-          "color": "#666666",
-          "fontSize": 13
-        }
-      ]
-    },
-    {
-      "type": "spacer",
-      "id": "9",
-      "height": 10
-    },
-    {
-      "type": "card",
-      "id": "10",
-      "paddingH": 20,
-      "paddingV": 16,
-      "color": "#FFFFFF",
-      "cornerRadius": 20,
-      "borderColor": "#E0D6F2",
-      "borderWidth": 1,
-      "actionName": "card_tap",
-      "children": [
-        {
-          "type": "text",
-          "id": "11",
-          "text": "Click Handling",
-          "color": "#1A1A2E",
-          "fontSize": 18
-        },
-        {
-          "type": "spacer",
-          "id": "12",
-          "height": 4
-        },
-        {
-          "type": "text",
-          "id": "13",
-          "text": "Tap this card \u2014 the click event is handled by the host app.",
-          "color": "#666666",
-          "fontSize": 13
-        }
-      ]
-    },
-    {
-      "type": "spacer",
-      "id": "14",
-      "height": 10
-    },
-    {
-      "type": "row",
-      "id": "15",
-      "children": [
-        {
-          "type": "button",
-          "id": "16",
-          "text": "Action A",
-          "color": "#6200EA",
-          "textColor": "#FFFFFF",
-          "fontSize": 14,
-          "cornerRadius": 24,
-          "actionName": "action_a"
-        },
-        {
-          "type": "button",
-          "id": "17",
-          "text": "Action B",
-          "color": "#00897B",
-          "textColor": "#FFFFFF",
-          "fontSize": 14,
-          "cornerRadius": 24,
-          "actionName": "action_b"
-        }
-      ]
-    },
-    {
-      "type": "spacer",
-      "id": "18",
-      "height": 6
-    },
-    {
-      "type": "divider",
-      "id": "19",
-      "color": "#E0D6F2",
-      "height": 1
-    },
-    {
-      "type": "spacer",
-      "id": "20",
-      "height": 6
+      "id": "98",
+      "height": 16
     },
     {
       "type": "button",
-      "id": "21",
-      "text": "Go to Detail Screen",
-      "color": "#4A148C",
+      "id": "97",
+      "text": "Button",
+      "color": "#6200EA",
       "textColor": "#FFFFFF",
       "fontSize": 16,
-      "cornerRadius": 28,
-      "actionName": "navigate:detail",
-      "borderColor": "#7E57C2",
-      "borderWidth": 2
+      "cornerRadius": 24,
+      "actionName": "btn_97"
     },
     {
       "type": "spacer",
-      "id": "22",
-      "height": 8
+      "id": "102",
+      "height": 16
     },
     {
-      "type": "text",
-      "id": "23",
-      "text": "Change anything from the browser. No app update needed.",
-      "color": "#9CA3AF",
-      "fontSize": 12
+      "type": "row",
+      "id": "99",
+      "children": [
+        {
+          "type": "button",
+          "id": "100",
+          "text": "Yes",
+          "color": "#6200EA",
+          "textColor": "#FFFFFF",
+          "fontSize": 14,
+          "cornerRadius": 20
+        },
+        {
+          "type": "button",
+          "id": "101",
+          "text": "No",
+          "color": "#0B6F65",
+          "textColor": "#FFFFFF",
+          "fontSize": 14,
+          "cornerRadius": 20
+        }
+      ]
     }
   ]
 }
