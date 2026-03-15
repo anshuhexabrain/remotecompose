@@ -77,7 +77,7 @@ class RemoteComposeHandler(SimpleHTTPRequestHandler):
                 "screen": screen,
                 "jsonFile": json_name,
                 "rcFile": rc_name,
-                "rcUrl": f"http://192.168.0.13:8000/{rc_name}",
+                "rcUrl": f"http://192.168.0.105:8000/{rc_name}",
             },
         )
 

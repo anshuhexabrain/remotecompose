@@ -1,56 +1,260 @@
 {
-  "backgroundColor": "#F5F0FF",
+  "backgroundColor": "#F9FAFB",
+  "scrollable": true,
+  "padding": 24,
   "elements": [
     {
       "type": "text",
-      "id": "1",
-      "text": "Sample App",
-      "color": "#4A148C",
-      "fontSize": 32
+      "id": "logo",
+      "text": "CINEMA",
+      "color": "#E50914",
+      "fontSize": 28
     },
     {
       "type": "spacer",
-      "id": "98",
-      "height": 16
+      "id": "sp1",
+      "height": 24
     },
     {
-      "type": "button",
-      "id": "97",
-      "text": "Button",
-      "color": "#6200EA",
-      "textColor": "#FFFFFF",
-      "fontSize": 16,
-      "cornerRadius": 24,
-      "actionName": "btn_97"
+      "type": "text",
+      "id": "featured_label",
+      "text": "FEATURED PREMIERE",
+      "color": "#6B7280",
+      "fontSize": 12
     },
     {
       "type": "spacer",
-      "id": "102",
-      "height": 16
+      "id": "sp2",
+      "height": 8
     },
     {
-      "type": "row",
-      "id": "99",
+      "type": "card",
+      "id": "hero_card",
+      "color": "#FFFFFF",
+      "cornerRadius": 16,
+      "paddingH": 20,
+      "paddingV": 24,
+      "borderColor": "#E5E7EB",
+      "borderWidth": 1,
       "children": [
         {
-          "type": "button",
-          "id": "100",
-          "text": "Yes",
-          "color": "#6200EA",
-          "textColor": "#FFFFFF",
-          "fontSize": 14,
-          "cornerRadius": 20
+          "type": "text",
+          "id": "hero_title",
+          "text": "DUNE: PART TWO",
+          "color": "#111827",
+          "fontSize": 26
         },
         {
-          "type": "button",
-          "id": "101",
-          "text": "No",
-          "color": "#0B6F65",
-          "textColor": "#FFFFFF",
-          "fontSize": 14,
-          "cornerRadius": 20
+          "type": "spacer",
+          "id": "h_sp1",
+          "height": 8
+        },
+        {
+          "type": "text",
+          "id": "hero_meta",
+          "text": "2024 \u2022 Sci-Fi \u2022 2h 46m",
+          "color": "#6B7280",
+          "fontSize": 14
+        },
+        {
+          "type": "spacer",
+          "id": "h_sp2",
+          "height": 16
+        },
+        {
+          "type": "text",
+          "id": "hero_desc",
+          "text": "Paul Atreides unites with Chani and the Fremen while on a warpath of revenge against the conspirators who destroyed his family.",
+          "color": "#4B5563",
+          "fontSize": 14
+        },
+        {
+          "type": "spacer",
+          "id": "h_sp3",
+          "height": 24
+        },
+        {
+          "type": "row",
+          "id": "hero_actions",
+          "children": [
+            {
+              "type": "button",
+              "id": "btn_play",
+              "text": "Play Movie",
+              "color": "#111827",
+              "textColor": "#FFFFFF",
+              "fontSize": 14,
+              "cornerRadius": 8,
+              "actionName": "play_movie"
+            },
+            {
+              "type": "spacer",
+              "id": "h_sp4",
+              "width": 12
+            },
+            {
+              "type": "button",
+              "id": "btn_trailer",
+              "text": "Trailer",
+              "color": "#F3F4F6",
+              "textColor": "#111827",
+              "fontSize": 14,
+              "cornerRadius": 8,
+              "actionName": "play_trailer",
+              "borderColor": "#D1D5DB",
+              "borderWidth": 1
+            }
+          ]
         }
       ]
+    },
+    {
+      "type": "spacer",
+      "id": "sp3",
+      "height": 32
+    },
+    {
+      "type": "text",
+      "id": "cw_title",
+      "text": "Continue Watching",
+      "color": "#111827",
+      "fontSize": 18
+    },
+    {
+      "type": "spacer",
+      "id": "sp4",
+      "height": 16
+    },
+    {
+      "type": "card",
+      "id": "cw_item",
+      "color": "#FFFFFF",
+      "cornerRadius": 12,
+      "paddingH": 16,
+      "paddingV": 16,
+      "borderColor": "#E5E7EB",
+      "borderWidth": 1,
+      "children": [
+        {
+          "type": "text",
+          "id": "cw_movie",
+          "text": "Blade Runner 2049",
+          "color": "#111827",
+          "fontSize": 16
+        },
+        {
+          "type": "spacer",
+          "id": "cw_sp1",
+          "height": 6
+        },
+        {
+          "type": "text",
+          "id": "cw_rem",
+          "text": "42m remaining",
+          "color": "#6B7280",
+          "fontSize": 13
+        },
+        {
+          "type": "spacer",
+          "id": "cw_sp2",
+          "height": 12
+        },
+        {
+          "type": "divider",
+          "id": "cw_div",
+          "color": "#E50914",
+          "height": 3
+        }
+      ]
+    },
+    {
+      "type": "spacer",
+      "id": "sp5",
+      "height": 32
+    },
+    {
+      "type": "text",
+      "id": "tr_title",
+      "text": "Top Picks For You",
+      "color": "#111827",
+      "fontSize": 18
+    },
+    {
+      "type": "spacer",
+      "id": "sp6",
+      "height": 16
+    },
+    {
+      "type": "card",
+      "id": "tr_1",
+      "color": "#FFFFFF",
+      "cornerRadius": 12,
+      "paddingH": 16,
+      "paddingV": 16,
+      "borderColor": "#E5E7EB",
+      "borderWidth": 1,
+      "children": [
+        {
+          "type": "text",
+          "id": "tr_1_title",
+          "text": "Oppenheimer",
+          "color": "#111827",
+          "fontSize": 16
+        },
+        {
+          "type": "spacer",
+          "id": "tr_1_sp",
+          "height": 4
+        },
+        {
+          "type": "text",
+          "id": "tr_1_meta",
+          "text": "Biography \u2022 Drama",
+          "color": "#6B7280",
+          "fontSize": 13
+        }
+      ]
+    },
+    {
+      "type": "spacer",
+      "id": "sp7",
+      "height": 12
+    },
+    {
+      "type": "card",
+      "id": "tr_2",
+      "color": "#FFFFFF",
+      "cornerRadius": 12,
+      "paddingH": 16,
+      "paddingV": 16,
+      "borderColor": "#E5E7EB",
+      "borderWidth": 1,
+      "children": [
+        {
+          "type": "text",
+          "id": "tr_2_title",
+          "text": "The Batman",
+          "color": "#111827",
+          "fontSize": 16
+        },
+        {
+          "type": "spacer",
+          "id": "tr_2_sp",
+          "height": 4
+        },
+        {
+          "type": "text",
+          "id": "tr_2_meta",
+          "text": "Action \u2022 Crime",
+          "color": "#6B7280",
+          "fontSize": 13
+        }
+      ]
+    },
+    {
+      "type": "spacer",
+      "id": "sp8",
+      "height": 24
     }
   ]
 }
